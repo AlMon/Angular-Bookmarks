@@ -27,32 +27,28 @@
     
     <div class="row">
       <div class="col12">
+        <h1 class="text-center">Angular Bookmarks</h1>
         <input type="text" placeholder="Search Bookmarks" ng-model="search" />
       </div>
     </div>    
     
-    <form name="bookmarkform" ng-submit="addBookmark()">
-      <div class="row">
-        <div class="col-6">
-          <input name="title" type="text" ng-model="title" required>
-        </div>
-        <div class="col-6">
-          <input name="url" type="text" ng-model="url" required>
-        </div>
+
+    <div class="row">
+      <form name="bookmarkform" ng-submit="addBookmark()" class="col-4">
+        <input name="title" type="text" ng-model="title" required>
+        <input name="url" type="text" ng-model="url" required>
         <input name="category" type="text" ng-model="category" required>
-        <div class="col-2 center">
+        <div class="center">
           <button ng-disabled="bookmarkform.$invalid">Add Bookmark</button>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
     
     <div class="row" ng-repeat="bookmark in bookmarks | filter: search">
       <div class="col-12">
         <a ng-href="{{bookmark.url}}">{{bookmark.title || 'empty'}}</a>
         <p>{{bookmark.category}}</p>
-        <small>
-          <a href="" class="delete pull-right btn btn-clear" ng-click="removeBookmark($index)">Delete</a>
-        </small>
+        <a href="" class="delete pull-right btn btn-clear" ng-click="removeBookmark($index)">Delete</a>
       </div>   
     </div>
     
