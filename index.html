@@ -14,42 +14,64 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.6.0/js/xeditable.min.js"></script>
     <!-- Xeditable CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.6.0/css/xeditable.min.css">
-    <!-- CSS Framework (Disabled Until Needed) -->
+    <!-- CSS Framework -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.8/wing.min.css"> 
     <!-- Custom Style -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- App -->
     <script src="js/app.js"></script>
   </head>
   <body>
   
   <div class="container" ng-controller="BookmarksCtrl" ng-init="getBookmarks()">
-    
+
     <div class="row">
       <div class="col12">
-        <h1 class="text-center">Angular Bookmarks</h1>
-        <input type="text" placeholder="Search Bookmarks" ng-model="search" />
+        <h1 class="text-center"><i class="fa fa-bookmark icon" aria-hidden="true"></i> Angular Bookmarks</h1>
+        <p class="text-center">[Feel free to come back later, your bookmarks will still be here!]</p>
       </div>
     </div>    
     
 
     <div class="row">
-      <form name="bookmarkform" ng-submit="addBookmark()" class="col-4">
-        <input name="title" type="text" ng-model="title" required>
-        <input name="url" type="text" ng-model="url" required>
-        <input name="category" type="text" ng-model="category" required>
-        <div class="center">
-          <button ng-disabled="bookmarkform.$invalid">Add Bookmark</button>
+      <div class="col-3">
+        <form name="bookmarkform" ng-submit="addBookmark()">
+          <p class="text-center">Add Bookmark:</p>
+          <input name="title" type="text" ng-model="title" required placeholder="Bookmark Title">
+          <input name="url" type="text" ng-model="url" required placeholder="Site URL">
+          <input name="category" type="text" ng-model="category" required placeholder="Category">
+          <div class="center">
+            <button ng-disabled="bookmarkform.$invalid" class="add-btn">Add Bookmark</button>
+          </div>
+        </form>
+        <hr>
+        <div>
+          <p class="text-center">Search:</p>
+          <input type="text" placeholder="Search Bookmarks" ng-model="search" />
         </div>
-      </form>
+      </div>
+      <div class="col-9">
+        <p class="text-center">Your Bookmarks:</p>
+        
+        <ul>
+          <li ng-repeat="bookmark in bookmarks | filter: search" class="bookmark">
+            <span class="category">{{bookmark.category}}</span>
+            <a ng-href="{{bookmark.url}}" class="title">{{bookmark.title || 'empty'}}</a>
+            <i ng-click="removeBookmark($index)" class="pull-right fa fa-trash-o delete" aria-hidden="true"></i>
+            <span editable-text="bookmark.title" buttons="no" onaftersave="updateTitle()" class="pull-right">Edit</span>
+            <hr>
+          </li>
+        </ul> 
+      </div>
     </div>
-    
-    <div class="row" ng-repeat="bookmark in bookmarks | filter: search">
-      <div class="col-12">
-        <a ng-href="{{bookmark.url}}">{{bookmark.title || 'empty'}}</a>
-        <p>{{bookmark.category}}</p>
-        <a href="" class="delete pull-right btn btn-clear" ng-click="removeBookmark($index)">Delete</a>
-      </div>   
+    <div class="row">
+      <div class="col-12 credit text-center">
+        <p id="credit">Made With <i class="fa fa-heart project-link" aria-hidden="true"></i> Using <a href="https://angularjs.org/" class="project-link">Angular</a> By <a href="" class="project-link">Al Mondragon</a>. <br>
+        Feel free to check it out on <a href="https://github.com/AlMon/Angular-Bookmarks" id="gh-link">Github!</a>
+        </p>
+      </div>
     </div>
     
     

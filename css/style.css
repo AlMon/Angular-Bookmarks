@@ -1,14 +1,75 @@
+/* Project Styles */
 
+ul {
+  list-style-type: none;
+}
 
+.category {
+  background-color: #E25041;
+  color: #fff;
+  font-size: 0.90rem;
+  line-height: 2;
+  font-weight: 700;
+  padding: 3px 7px;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
 
-/*Universal Classes*/
+.category {
+  border-radius: 4px;
+  display: inline;
+}
+
+.category[href]:hover, .category[href]:focus {
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.category a {
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.category:empty {
+  display: none;
+}
+
+.delete {
+  font-size: 20px !important;
+  cursor: pointer;
+  margin-top: 1px;
+}
+
+.title {
+  text-transform: uppercase;
+  margin-left: 5px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* Universal Styles */
+
+.icon {
+  color: #E25041;
+}
 
 h1 {
   font-size: 4rem;
 }
 
-#fw-link {
+.project-link {
   color: #E25041;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+#gh-link {
+  color: #000;
   font-weight: 700;
   text-decoration: none;
 }
@@ -17,7 +78,7 @@ h1 {
   font-size: 11px; 
 }
 
-/*Classes for animations*/
+/* Classes for animations */
 .add-btn:disabled, [type="submit"]:disabled, button:disabled {
   background: #FFF;
   border: 1px #E25041 solid;
