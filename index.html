@@ -37,31 +37,31 @@
 
     <div class="row">
       <div class="col-3">
-        <form name="bookmarkform" ng-submit="addBookmark()">
-          <p class="text-center">Add Bookmark:</p>
-          <input name="title" type="text" ng-model="title" required placeholder="Bookmark Title">
-          <input name="url" type="text" ng-model="url" required placeholder="Site URL">
-          <input name="category" type="text" ng-model="category" required placeholder="Category">
+        <form name="bookmarkform" ng-submit="addBookmark()" novalidate>
+          <p class="text-center title">Add Bookmark:</p>
+          <input name="title" type="text" ng-model="title" required placeholder="Bookmark Title*" ng-required="true">
+          <input name="url" type="url" ng-model="url" required placeholder="Site URL*" ng-required="true">
+          <small ng-show="bookmarkform.url.$dirty && bookmarkform.url.$invalid">That's not a valid URL!</small>
+          <input name="category" type="text" ng-model="category" required placeholder="Category*" ng-required="true">
           <div class="center">
-            <button ng-disabled="bookmarkform.$invalid" class="add-btn">Add Bookmark</button>
+            <button name="submit" ng-disabled="bookmarkform.$invalid" class="add-btn">Add Bookmark</button>
           </div>
         </form>
-        <hr>
-        <div>
-          <p class="text-center">Search:</p>
+        <hr id="search-sep">
+        <div class="text-center">
+          <i class="fa fa-search" aria-hidden="true" style="font-size: 15px;"></i>
           <input type="text" placeholder="Search Bookmarks" ng-model="search" />
         </div>
       </div>
       <div class="col-9">
-        <p class="text-center">Your Bookmarks:</p>
+        <p class="text-center title">Your Bookmarks:</p>
         
         <ul>
           <li ng-repeat="bookmark in bookmarks | filter: search" class="bookmark">
             <span class="category">{{bookmark.category}}</span>
-            <a ng-href="{{bookmark.url}}" class="title">{{bookmark.title || 'empty'}}</a>
+            <a ng-href="{{bookmark.url}}" class="bookmark-title">{{bookmark.title || 'empty'}}</a>
             <i ng-click="removeBookmark($index)" class="pull-right fa fa-trash-o delete" aria-hidden="true"></i>
-            <span editable-text="bookmark.title" buttons="no" onaftersave="updateTitle()" class="pull-right">Edit</span>
-            <hr>
+            <hr class="bookmark-sep">
           </li>
         </ul> 
       </div>

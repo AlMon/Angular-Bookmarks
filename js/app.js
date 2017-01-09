@@ -31,6 +31,7 @@ bx.controller("BookmarksCtrl", ["$scope", "localStorageService", function($scope
     $scope.title = "",
     $scope.url = "",
     $scope.category = "";
+    $scope.bookmarkform.$setPristine();
   }
   
   $scope.removeBookmark = function(start){
@@ -40,18 +41,6 @@ bx.controller("BookmarksCtrl", ["$scope", "localStorageService", function($scope
       localStorageService.set("bookmarkData", $scope.bookmarks);
     }
     localStorageService.set("bookmarkData", $scope.bookmarks);
-  }
-  
-  $scope.updateTitle = function(){
-    localStorageService.set("todoData", $scope.title);
-  }
-  
-  $scope.updateUrl = function(){
-    localStorageService.set("todoData", $scope.url);
-  }
-  
-  $scope.updateCategory = function(){
-    localStorageService.set("todoData", $scope.category);
   }
   
 }]);
